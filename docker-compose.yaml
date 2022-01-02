@@ -1,0 +1,33 @@
+version: "3"
+services:
+  exacta-database:
+    image: postgres:9.6
+    restart: always
+    container_name: "exacta-database"
+    environment:
+      - POSTGRES_USER=exacta
+      - POSTGRES_PASSWORD=1914
+      - POSTGRES_DB=desafio-exacta
+      - TZ=GMT
+    volumes:
+      - "./data/postgres:/var/lib/postgresql/data"
+    ports:
+      - 5432:5432
+    networks:
+      - exacta-network
+
+#  exacta-api:
+#    build: .
+#    container_name: "exacta-api"
+#    env_file:
+#      - docker-compose.yaml.env
+#    ports:
+#      - 8082:8080
+#    networks:
+#      - exacta-network
+#    depends_on:
+#      - exacta-database
+
+networks:
+  exacta-network:
+    driver: bridge
