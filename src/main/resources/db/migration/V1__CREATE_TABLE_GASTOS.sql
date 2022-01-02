@@ -2,7 +2,7 @@
 -- TABELA GASTOS
 --------------------------------------------------------------------------------------------
 
-create table GASTOS
+create table schema_solucao.GASTOS
 (
     id_gastos    int8 not null,
     data_gasto   timestamp,
@@ -11,7 +11,7 @@ create table GASTOS
     tags         varchar(255),
     valor        numeric(19, 2),
     primary key (id_gastos)
-)
+);
 --------------------------------------------------------------------------------------------
 -- SEQUENCIA PARA  GASTOS
 --------------------------------------------------------------------------------------------
@@ -23,7 +23,7 @@ CREATE SEQUENCE schema_solucao.SEQ_GASTOS
 --------------------------------------------------------------------------------------------
 -- CRIA TABELA DE AUDITORIA FROTA
 --------------------------------------------------------------------------------------------
-create table GASTOS_AUD
+create table schema_auditoria.GASTOS_AUD
 (
     id_gastos    int8 not null,
     rev          int4 not null,
@@ -34,7 +34,7 @@ create table GASTOS_AUD
     tags         varchar(255),
     valor        numeric(19, 2),
     primary key (id_gastos, rev)
-)
+);
 
 --------------------------------------------------------------------------------------------
 -- CRIA TABELA DE AUDITORIA REVINFO
@@ -44,7 +44,7 @@ create table schema_auditoria.revinfo
     rev      int4 not null,
     revtstmp int8,
     primary key (rev)
-)
+);
 
 --------------------------------------------------------------------------------------------
 -- ADICIONA RESTRIÇÃO PARA TABELA GASTOS_AUD
@@ -52,4 +52,4 @@ create table schema_auditoria.revinfo
 alter table schema_auditoria.GASTOS_AUD
     add constraint FK_GASTOS_AUD
         foreign key (rev)
-            references schema_auditoria.revinfo
+            references schema_auditoria.revinfo;
