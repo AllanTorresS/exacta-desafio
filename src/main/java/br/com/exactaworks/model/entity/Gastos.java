@@ -10,9 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Audited
@@ -29,10 +31,19 @@ public class Gastos {
     @EqualsAndHashCode.Include
     private Long idGastos;
 
+    @NotBlank
     private String nomeUsuario;
+
+    @NotBlank
     private String descricao;
+
+    @NotNull
     private Date dataGasto;
+
+    @DecimalMin("0.1")
     private BigDecimal valor;
+
+
     private String tags;
 
 }
