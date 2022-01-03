@@ -1,7 +1,7 @@
 package br.com.exactaworks.service;
 
 import br.com.exactaworks.model.entity.Gastos;
-import br.com.exactaworks.model.error.ExactaNotFoundExeception;
+import br.com.exactaworks.model.error.custom.ExactaNotFoundExeception;
 import br.com.exactaworks.repository.GastosRepository;
 import br.com.exactaworks.util.UtilitarioAmbiente;
 import org.springframework.beans.factory.annotation.Autowired;

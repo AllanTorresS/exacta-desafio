@@ -16,6 +16,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -47,8 +48,10 @@ public class Gastos {
     private LocalDateTime dataGasto;
 
     @DecimalMin("0.1")
+    @NotNull
     private BigDecimal valor;
 
+    @NotEmpty
     private String tags;
 
     @JsonFormat(pattern="dd/MM/yyyy HH:mm:ss")
