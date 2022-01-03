@@ -25,7 +25,7 @@ public class GastosController {
     private GastosService gastosService;
 
     @PostMapping(value = "/save")
-    @ApiOperation(value = "Salva um Gasto")
+    @ApiOperation(value = "Salva um gasto")
     public ResponseEntity save(@Valid @RequestBody Gastos gasto) {
         return ResponseEntity.status(HttpStatus.OK).body(this.gastosService.save(gasto));
     }
