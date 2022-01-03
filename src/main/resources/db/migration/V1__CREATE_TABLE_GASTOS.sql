@@ -4,18 +4,27 @@
 
 create table schema_solucao.GASTOS
 (
-    id_gastos    int8 not null,
-    data_gasto   timestamp,
-    descricao    varchar(255),
-    nome_usuario varchar(255),
-    tags         varchar(255),
-    valor        numeric(19, 2),
+    id_gastos       int8 not null,
+    data_gasto      timestamp,
+    descricao       varchar(255),
+    nome_usuario    varchar(255),
+    tags            varchar(255),
+    valor           numeric(19, 2),
+    data_requisicao timestamp,
     primary key (id_gastos)
 );
 --------------------------------------------------------------------------------------------
--- SEQUENCIA PARA  GASTOS
+-- SEQUENCIA PARA GASTOS
 --------------------------------------------------------------------------------------------
 CREATE SEQUENCE schema_solucao.SEQ_GASTOS
+    INCREMENT BY 1
+    MINVALUE 1
+    MAXVALUE 9223372036854775807;
+
+--------------------------------------------------------------------------------------------
+-- SEQUENCIA PARA AUDITORIA
+--------------------------------------------------------------------------------------------
+CREATE SEQUENCE schema_solucao.hibernate_sequence
     INCREMENT BY 1
     MINVALUE 1
     MAXVALUE 9223372036854775807;
@@ -25,14 +34,15 @@ CREATE SEQUENCE schema_solucao.SEQ_GASTOS
 --------------------------------------------------------------------------------------------
 create table schema_auditoria.GASTOS_AUD
 (
-    id_gastos    int8 not null,
-    rev          int4 not null,
-    revtype      int2,
-    data_gasto   timestamp,
-    descricao    varchar(255),
-    nome_usuario varchar(255),
-    tags         varchar(255),
-    valor        numeric(19, 2),
+    id_gastos       int8 not null,
+    rev             int4 not null,
+    revtype         int2,
+    data_gasto      timestamp,
+    descricao       varchar(255),
+    nome_usuario    varchar(255),
+    tags            varchar(255),
+    valor           numeric(19, 2),
+    data_requisicao timestamp,
     primary key (id_gastos, rev)
 );
 
