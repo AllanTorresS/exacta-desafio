@@ -38,10 +38,14 @@ public class GlobalErrorHandler extends ResponseEntityExceptionHandler {
 
     private final String preFixo = "Parâmentro ";
 
-
-
-
-
+    /**
+     * Centraliza o error de atributos invalidos na requisição
+     * @param ex Tipo de execeção
+     * @param headers Cabeçalhos da requisição
+     * @param status O status do erro
+     * @param request A requisição
+     * @return Resposta de erro tratada com os campos invalidos
+     */
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
 
@@ -56,6 +60,14 @@ public class GlobalErrorHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity(exactaErrorResponseDTO, headers, status);
     }
 
+    /**
+     * Centraliza o error de conversão para Json ou outro formato
+     * @param ex Tipo de execeção
+     * @param headers Cabeçalhos da requisição
+     * @param status O status do erro
+     * @param request A requisição
+     * @return Resposta de erro tratada
+     */
     @Override
     protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
 
@@ -68,12 +80,12 @@ public class GlobalErrorHandler extends ResponseEntityExceptionHandler {
     }
 
     /**
-     *
-     * @param ex
-     * @param headers
-     * @param status
-     * @param request
-     * @return
+     * Centraliza o error de metodo não suportado
+     * @param ex Tipo de execeção
+     * @param headers Cabeçalhos da requisição
+     * @param status O status do erro
+     * @param request A requisição
+     * @return Resposta de erro tratada
      */
     @Override
     protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
@@ -87,6 +99,12 @@ public class GlobalErrorHandler extends ResponseEntityExceptionHandler {
 
     }
 
+    /**
+     * Centraliza o error de end point não encontrado
+     * @param ex Tipo de execeção
+     * @param request A requisição
+     * @return Resposta de erro tratada
+     */
     @Override
     protected ResponseEntity<Object> handleNoHandlerFoundException(NoHandlerFoundException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         List<String> erros = Arrays.asList(this.mensagemErroProperties("end.point.not.found", request));
@@ -97,6 +115,12 @@ public class GlobalErrorHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity(acertErrorResponse, headers, status);
     }
 
+    /**
+     * Centraliza o error de dados não encontrados
+     * @param ex Tipo de exaceção
+     * @param request A requisição
+     * @return Resposta de erro tratada
+     */
     @ExceptionHandler(ExactaNotFoundExeception.class)
     public ResponseEntity<Object> handleAcertNotFoundException(ExactaNotFoundExeception ex, WebRequest request) {
 
@@ -108,7 +132,12 @@ public class GlobalErrorHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity(acertErrorResponse, HttpStatus.NOT_FOUND);
     }
 
-
+    /**
+     * Centraliza error de Interno
+     * @param ex Tipo de exaceção
+     * @param request A requisição
+     * @return Resposta de erro tratada
+     */
     @ExceptionHandler(ExactaInternalServerErrorExeception.class)
     public ResponseEntity<Object> handleAcertInternalServerErrorExeception(ExactaInternalServerErrorExeception ex, WebRequest request) {
 
@@ -143,6 +172,12 @@ public class GlobalErrorHandler extends ResponseEntityExceptionHandler {
         return acertErrorResponse;
     }
 
+    /**
+     * Obtem a mensagem a partir de uma chave
+     * @param mensagenChave Chave que indica a mensagem
+     * @param request A requisição
+     * @return A mensagem
+     */
     private String mensagemErroProperties(String mensagenChave, WebRequest request) {
         Locale locale = request.getLocale();
         return this.messageSource.getMessage(mensagenChave, null, locale);
