@@ -19,4 +19,14 @@ public class UtilitarioFormatacaoData {
 
         return data.format(formatter);
     }
+
+    /**
+     * Converte uma string para um {@link LocalDateTime}
+     * @param pattern O padrão de formatação ex: dd/MM/yyyy
+     * @param data A data a ser convertida
+     * @return O texto convertido em data
+     */
+    public  LocalDateTime obterData(String pattern, String data) {
+        return LocalDateTime.parse(data, DateTimeFormatter.ofPattern(pattern));
+    }
 }
